@@ -1,15 +1,19 @@
 #!/bin/bash
 # Ask the user for their name
-echo Name of user you would like to add?
-read varname
-sudo adduser $varname
+#echo Name of user you would like to add?
+#read varname
+#sudo adduser $varname
 
-gpasswd -a $varname sudo
+#gpasswd -a $varname sudo
 
 
-echo User $varname has been added to the sudo users group. Booyah
+#echo User $varname has been added to the sudo users group. Booyah
 ###Switch user from root
-su - $varname
+#su - $varname
+
+echo What is your user name?
+read varname
+echo Initializing Rstudio-Server & Shiny-Server installation!
 
 #Get updates
 sudo apt-get update
@@ -80,4 +84,78 @@ git config --global user.name  $githubusername
 cd /srv/shiny-server
 git init
 
-echo It\'s nice to meet you $varname
+##Install the Java Runtime Environment
+sudo apt-get install -y default jre
+###Install the Java Development Kit
+sudo apt-get install -y default-jdk
+##Update where R expects to find various Java files
+sudo R CMD javareconf
+
+###Ask user if they want to install additional R packages:
+while true; do
+    read -p "$varname Do you wish to install 57 additional R packages?" yn
+    case $yn in
+        [Yy]* )
+sudo su - -c "R -e \"install.packages('DT', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('readr', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('corrgram', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('xlsx', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('randomForest', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('rgdal', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('leaflet', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('reshape', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('reshape2', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('dplyr', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('httr', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('jsonlite', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('shinyWidgets', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('rmarkdown', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('stringr', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('shinycssloaders', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('shinythemes', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('shinydashboard', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('RMySQL', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('sqldf', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('scales', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('tm', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('wordcloud', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('SnowballC', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('rvest', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('pander', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('ggplot2', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('rhandsontable', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('RPostgreSQL', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('DBI', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('formattable', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('mailR', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('ggvis', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('tree', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('BH', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('tigerstats', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('tidytext', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('syuzhet', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('pander', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('RWeka', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('RWekajars', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('partykit', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('qdap', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('rJava', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('RMySQL', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('twitteR', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('ROAuth', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('RCurl', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('purrr', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('XLConnect', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('tidyr', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('lubridate', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('scales', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('stringr', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('plyr', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('xtable', repos='http://cran.rstudio.com/')\""
+sudo su - -c "R -e \"install.packages('shinyTime', repos='http://cran.rstudio.com/')\"";;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+echo $varname 57 additional R packages have been installed on your server!
